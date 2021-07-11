@@ -18,7 +18,7 @@
     "noImplicitThis": true,
     "alwaysStrict": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
+    "baseUrl": "./src",
     "paths": {},
     "typeRoots": [
       "node_modules/@types"
@@ -29,7 +29,7 @@
     "allowSyntheticDefaultImports": true
   },
   "include": [
-    "./src"
+    "src/**/*"
   ]
 
 }

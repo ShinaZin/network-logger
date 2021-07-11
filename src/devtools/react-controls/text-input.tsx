@@ -1,5 +1,5 @@
 import * as React from 'react';
-import * as bc from '../styles/base';
+import * as bc from 'devtools/styles/base';
 import styled from 'styled-components';
 
 export const StyledInput = styled.input`
@@ -7,7 +7,7 @@ export const StyledInput = styled.input`
   color: ${bc.textColor};
   border: 1px solid transparent;
   padding: 1px;
-  
+
   :focus {
     border-color: ${bc.focusedBorder};
   }

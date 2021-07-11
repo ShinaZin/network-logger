@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { TextInput } from '../react-controls/text-input';
-import { Container } from './styles';
+import { TextInput } from 'devtools/react-controls/text-input';
+import { Container } from 'devtools/app/styles';
 
 export const App: React.FC = () => (
   <Container>
