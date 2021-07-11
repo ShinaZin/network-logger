@@ -6,3 +6,5 @@ export const focusedBorder = '#063a65';
 export const hoveredBorder = '#7a7a7a';
 // sizes
 export const fullSize = '100%';
+export const spacing = '8px';
+export const spacingSm = '4px';
