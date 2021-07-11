@@ -7,12 +7,12 @@ const StyledDiv = styled.div<Props>`
   flex-grow: ${p => p.grow ? 1 : 0};
   flex-direction: ${p => p.row ? 'row' : 'column'};
   & > *:not(:first-child) {
-    margin-top: ${p => p.col && (p.spacing && bc.spacing) || (p.spacingSm && bc.spacingSm)};
-    margin-left: ${p => p.row && (p.spacing && bc.spacing) || (p.spacingSm && bc.spacingSm)};
+    margin-top: ${p => p.col && getMarginValue(p)};
+    margin-left: ${p => p.row && getMarginValue(p)};
   }
 `;
 
-interface Props {
+interface Props extends React.HTMLAttributes<HTMLDivElement> {
   row?: boolean;
   col?: boolean;
   grow?: boolean;
@@ -27,3 +27,7 @@ export const Box: React.FC<Props> = props => {
     </StyledDiv>
   );
 };
+
+function getMarginValue(props: Props) {
+  return (props.spacing && bc.spacing) || (props.spacingSm && bc.spacingSm);
+}
