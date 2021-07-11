@@ -22,13 +22,12 @@ const enum KeyCodes {
   ENTER = 13
 }
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement>  {
+interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   onEnter?: (value: string) => void;
   grow?: boolean;
 }
 
 export class TextInput extends React.Component<Props> {
-
   private onEnter = (text: string) => {
     this.props.onEnter?.(text);
   };
@@ -43,7 +42,7 @@ export class TextInput extends React.Component<Props> {
   };
 
   render() {
-    const { onEnter, value, ...props } = this.props;
+    const { value, ...props } = this.props;
 
     return (
       <StyledInput

@@ -8,7 +8,6 @@
   "plugins": [
     "import",
     "react",
-    "local",
     "promise",
     "react-hooks",
     "@typescript-eslint"
@@ -22,6 +21,7 @@
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
+    "project": "./tsconfig.json",
     "ecmaFeatures": {
       "modules": true
     }
@@ -44,21 +44,18 @@
   },
   "rules": {
     "import/namespace": "off",
-    "local/no-async-with-super": "error",
-    "local/use-super": "error",
     "no-eval": "error",
     "no-return-await": "error",
     "promise/always-return": "off",
     "promise/catch-or-return": "off",
     "promise/no-return-in-finally": "error",
-    "@typescript-eslint/ban-tslint-comment": "error",
     "@typescript-eslint/ban-types": [
       "error",
       {
         "types": {
-          "{}": false,
-          "object": false,
-          "Function": false
+          "{}": null,
+          "object": null,
+          "Function": null
         },
         "extendDefaults": true
       }
@@ -84,7 +81,7 @@
     ],
     "@typescript-eslint/no-empty-function": "off",
     "@typescript-eslint/no-unused-vars": [
-      "warn",
+      "error",
       {
         "argsIgnorePattern": "^_"
       }

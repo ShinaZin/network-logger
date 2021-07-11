@@ -21,6 +21,7 @@
       "src/**/*.js.map": true
     },
     "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
     "search.exclude": {
       "**/*.d.ts": true,
       "**/*.js.map": true,

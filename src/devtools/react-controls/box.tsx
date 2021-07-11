@@ -25,5 +25,5 @@ export const Box: React.FC<Props> = props => {
     <StyledDiv {...props}>
       {props.children}
     </StyledDiv>
-  )
+  );
 };
