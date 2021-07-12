@@ -10,6 +10,10 @@ const StyledDiv = styled.div<Props>`
     margin-top: ${p => p.col && getMarginValue(p)};
     margin-left: ${p => p.row && getMarginValue(p)};
   }
+  padding-left: ${p => (p.padding == 'h' || p.padding === true) && bc.spacing};
+  padding-right: ${p => (p.padding == 'h' || p.padding === true) && bc.spacing};
+  padding-top: ${p => (p.padding == 'v' || p.padding === true) && bc.spacing};
+  padding-bottom: ${p => (p.padding == 'v' || p.padding === true) && bc.spacing};
 `;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,6 +22,7 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   grow?: boolean;
   spacing?: boolean;
   spacingSm?: boolean;
+  padding?: 'v' | 'h' | true;
 }
 
 export const Box: React.FC<Props> = props => {
