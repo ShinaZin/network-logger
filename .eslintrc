@@ -212,6 +212,7 @@
     "spaced-comment": "error",
     "switch-colon-spacing": "error",
     "template-tag-spacing": "error",
+    "jsx-quotes":  ["error", "prefer-single"],
     "react/jsx-child-element-spacing": "error",
     "react/jsx-closing-bracket-location": [
       "error",
