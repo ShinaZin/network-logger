@@ -2,6 +2,7 @@ import * as React from 'react';
 import { Border } from 'devtools/react-controls/border';
 import { Box } from 'devtools/react-controls/box';
 import { TextInput } from 'devtools/react-controls/text-input';
+import { Icon } from './icon';
 
 const style: React.CSSProperties = { width: '75%', margin: 'auto' };
 
@@ -15,11 +16,15 @@ export const Rules: React.FC = () => (
   </Border>
 );
 
-
-
 const Item: React.FC = () => (
-  <Box col spacingSm>
-    <TextInput placeholder='/api/request/method' grow />
-    <TextInput placeholder='path.to.item[0].name' />
+  <Box row spacing grow>
+    <Box col spacingSm grow>
+      <TextInput placeholder='/api/request/method' />
+      <TextInput placeholder='path.to.item[0].name' />
+    </Box>
+    <Box col spacingSm>
+      <Icon src='/assets/icons/actions/delete.svg' />
+      <Icon src='/assets/icons/actions/new.svg' />
+    </Box>
   </Box>
 );
