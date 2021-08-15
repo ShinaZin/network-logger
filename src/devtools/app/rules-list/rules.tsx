@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Border } from 'devtools/react-controls/border';
 import { Box } from 'devtools/react-controls/box';
 import { TextInput } from 'devtools/react-controls/text-input';
-import { Icon } from './icon';
+import { IconButton } from 'devtools/react-controls/icon-button';
 
 const style: React.CSSProperties = { width: '75%', margin: 'auto' };
 
@@ -23,8 +23,8 @@ const Item: React.FC = () => (
       <TextInput placeholder='path.to.item[0].name' />
     </Box>
     <Box col spacingSm>
-      <Icon src='/assets/icons/actions/delete.svg' />
-      <Icon src='/assets/icons/actions/new.svg' />
+      <IconButton src='/assets/icons/actions/delete.svg' />
+      <IconButton src='/assets/icons/actions/new.svg' />
     </Box>
   </Box>
 );
