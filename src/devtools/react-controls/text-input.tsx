@@ -2,7 +2,11 @@ import * as React from 'react';
 import * as bc from 'devtools/styles/base';
 import styled from 'styled-components';
 
-export const StyledInput = styled.input<Props>`
+interface StyledProps extends React.InputHTMLAttributes<HTMLInputElement> {
+  grow?: boolean;
+}
+
+export const StyledInput = styled.input<StyledProps>`
   background-color: ${bc.controlBgColor};
   color: ${bc.textColor};
   border: 1px solid transparent;
@@ -22,16 +26,19 @@ const enum KeyCodes {
   ENTER = 13
 }
 
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends Omit<StyledProps, 'onChange'> {
   onEnter?: (value: string) => void;
-  grow?: boolean;
+  onChange?: (value: string) => void;
 }
 
 export class TextInput extends React.Component<Props> {
+  private onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.props.onChange?.(e.target.value);
+  };
+
   private onEnter = (text: string) => {
     this.props.onEnter?.(text);
   };
-
 
   private onKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.keyCode == KeyCodes.ENTER && this.props.onEnter) {
@@ -42,13 +49,14 @@ export class TextInput extends React.Component<Props> {
   };
 
   render() {
-    const { value, ...props } = this.props;
+    const { value, onChange, ...props } = this.props;
 
     return (
       <StyledInput
         value={value}
         type='text'
         {...props}
+        onChange={this.onChange}
         onKeyDown={this.onKeyDown}
       />
     );
