@@ -1,50 +1,46 @@
 import * as React from 'react';
-import { useForceUpdate } from 'common/hooks';
 import { Border } from 'devtools/react-controls/border';
 import { Box } from 'devtools/react-controls/box';
 import { IconButton } from 'devtools/react-controls/icon-button';
 import { TextInput } from 'devtools/react-controls/text-input';
-import { Store } from 'devtools/store/store';
+import { RulesContext, RulesContextConsumer } from 'devtools/store/store';
 import { Rule } from './types';
 
 const style: React.CSSProperties = { width: '75%', margin: 'auto' };
 
-export const Rules: React.FC = () => {
-  const forceUpdate = useForceUpdate();
-  React.useEffect(() => Store.setUpdater(forceUpdate), []);
+export const Rules: React.FC = () => (
+  <RulesContextConsumer>
+    {context => (
+      <Border top>
+        <Box col spacing style={style} padding='v'>
+          {context.rules.map((rule, i) => (
+            <RuleItem key={rule.id} index={i} rule={rule} context={context} />
+          ))}
+        </Box>
+      </Border>
+    )}
+  </RulesContextConsumer>
+);
 
-  return (
-    <Border top>
-      <Box col spacing style={style} padding='v'>
-        {Store.rules.map((rule, i) => (
-          <RuleItem key={rule.id} index={i} rule={rule} />
-        ))}
-      </Box>
-    </Border>
-  );
-};
 
 interface RuleItemProps {
   index: number;
   rule: Omit<Rule, 'id'>;
+  context: RulesContext;
 }
 
 const RuleItem: React.FC<RuleItemProps> = (props) => {
-  const { rule, index } = props;
+  const { rule, index, context } = props;
 
-  const onPathChange = (path: string) => {
-    Store.setRulePath(index, path);
-  };
+  const onPathChange = (path: string) => context.setRulePath(index, path);
 
-  const onUrlChange = (url: string) => {
-    Store.setRuleUrl(index, url);
-  };
+  const onUrlChange = (url: string) => context.setRuleUrl(index, url);
 
-  const onRemove = () => Store.removeRule(index);
+  const onRemove = () => context.removeRule(index);
 
-  const onAdd = () => Store.insertRule(index);
+  const onAdd = () => context.insertRule(index);
 
-  const disabled = Store.rules.length == 1;
+  const disabled = context.rules.length == 1;
 
   return (
     <Box row spacing grow>
