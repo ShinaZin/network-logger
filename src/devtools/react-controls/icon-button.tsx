@@ -20,6 +20,10 @@ const StyledButton = styled.button<Props>`
   :active {
     filter: brightness(50%);
   }
+
+  :disabled {
+    filter: brightness(30%);
+  }
 `;
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
