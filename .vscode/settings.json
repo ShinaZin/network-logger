@@ -27,5 +27,6 @@
       "**/*.js.map": true,
       "**/node_modules": true,
       "dist": true,
-    }
+    },
+    "typescript.preferences.importModuleSpecifier": "shortest",
   }
