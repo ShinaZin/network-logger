@@ -2,7 +2,11 @@ import * as React from 'react';
 import * as bc from 'devtools/styles/base';
 import styled from 'styled-components';
 
-const StyledDiv = styled.div<Props>`
+interface StyledProps extends Omit<Props, 'spacing'> {
+  spacingM?: Props['spacing'];
+}
+
+const StyledDiv = styled.div<StyledProps>`
   display: flex;
   flex-grow: ${p => p.grow ? 1 : 0};
   flex-direction: ${p => p.row ? 'row' : 'column'};
@@ -26,13 +30,14 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const Box: React.FC<Props> = props => {
+  const { spacing, ...rest } = props;
   return (
-    <StyledDiv {...props}>
+    <StyledDiv spacingM={spacing} {...rest}>
       {props.children}
     </StyledDiv>
   );
 };
 
-function getMarginValue(props: Props) {
-  return (props.spacing && bc.spacing) || (props.spacingSm && bc.spacingSm);
+function getMarginValue(props: StyledProps) {
+  return (props.spacingM && bc.spacing) || (props.spacingSm && bc.spacingSm);
 }
