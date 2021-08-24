@@ -1,3 +1,4 @@
+import { Color } from 'devtools/styles/status-colors';
 import * as React from 'react';
 import styled from 'styled-components';
 
@@ -11,23 +12,24 @@ const StyledButton = styled.button<Props>`
   vertical-align: middle;
   display: inline-block;
   cursor: pointer;
-  filter: brightness(50%);
+  filter: ${p => getIconColorFilters(p, 50)};
 
   :hover {
-    filter: brightness(85%);
+    filter: ${p => getIconColorFilters(p, 85)}
   }
 
   :active {
-    filter: brightness(50%);
+    filter: ${p => getIconColorFilters(p, 50)}
   }
 
   :disabled {
-    filter: brightness(30%);
+    filter: ${p => getIconColorFilters(p, 30)}
   }
 `;
 
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   src?: string;
+  status?: Color;
 }
 
 export const IconButton: React.FC<Props> = props => {
@@ -38,3 +40,15 @@ export const IconButton: React.FC<Props> = props => {
     </StyledButton>
   );
 };
+
+function getIconColorFilters(p: { status?: Color }, brightness: number) {
+  const bright = `brightness(${brightness}%)`;
+  if (!p.status) {
+    return bright;
+  }
+
+  const hue = (value: number) => `hue-rotate(${value}deg)`;
+  const colored = p.status == Color.error ? hue(-50) : '';
+
+  return `${bright} sepia(100%) ${colored} saturate(150%)`;
+}

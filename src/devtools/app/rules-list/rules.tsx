@@ -4,6 +4,7 @@ import { Box } from 'devtools/react-controls/box';
 import { IconButton } from 'devtools/react-controls/icon-button';
 import { TextInput } from 'devtools/react-controls/text-input';
 import { RulesContext, RulesContextConsumer } from 'devtools/store/store';
+import { Color } from 'devtools/styles/status-colors';
 import { Rule } from './types';
 
 const style: React.CSSProperties = { width: '75%', margin: 'auto' };
@@ -42,6 +43,11 @@ const RuleItem: React.FC<RuleItemProps> = (props) => {
 
   const disabled = context.rules.length == 1;
 
+  const icon = {
+    delete: '/assets/icons/actions/delete.svg',
+    add: '/assets/icons/actions/new.svg'
+  };
+
   return (
     <Box row spacing grow>
       <Box col spacingSm grow>
@@ -49,8 +55,8 @@ const RuleItem: React.FC<RuleItemProps> = (props) => {
         <TextInput placeholder='path.to.item[0].name' value={rule.path} onChange={onPathChange} />
       </Box>
       <Box col spacingSm>
-        <IconButton src='/assets/icons/actions/delete.svg' onClick={onRemove} disabled={disabled} />
-        <IconButton src='/assets/icons/actions/new.svg' onClick={onAdd} />
+        <IconButton src={icon.delete} onClick={onRemove} disabled={disabled} status={Color.error} />
+        <IconButton src={icon.add} onClick={onAdd} />
       </Box>
     </Box>
   );
