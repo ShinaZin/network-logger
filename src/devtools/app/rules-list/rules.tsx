@@ -7,18 +7,25 @@ import { RulesContext, RulesContextConsumer } from 'devtools/store/store';
 import { Color } from 'devtools/styles/status-colors';
 import { Rule } from './types';
 
-const style: React.CSSProperties = { width: '75%', margin: 'auto' };
+const style: React.CSSProperties = {
+  width: '75%',
+  margin: 'auto',
+  maxHeight: 'calc(100vh - 100px)',
+  overflow: 'auto',
+  justifyContent: 'flex-start'
+};
 
 export const Rules: React.FC = () => (
   <RulesContextConsumer>
     {context => (
-      <Border top>
+      <React.Fragment>
+        <Border top />
         <Box col spacing style={style} padding='v'>
           {context.rules.map((rule, i) => (
             <RuleItem key={rule.id} index={i} rule={rule} context={context} />
           ))}
         </Box>
-      </Border>
+      </React.Fragment>
     )}
   </RulesContextConsumer>
 );
@@ -49,7 +56,7 @@ const RuleItem: React.FC<RuleItemProps> = (props) => {
   };
 
   return (
-    <Box row spacing grow>
+    <Box row spacing grow padding='h'>
       <Box col spacingSm grow>
         <TextInput placeholder='/api/request/method' value={rule.url} onChange={onUrlChange} />
         <TextInput placeholder='path.to.item[0].name' value={rule.path} onChange={onPathChange} />
