@@ -1,5 +1,5 @@
 import { uuid } from 'common/uuid';
-import { Rule } from './types';
+import { Rule } from 'devtools/app/rules-list/types';
 
 export const getDefaultRules = (): Rule[] => [
   {
