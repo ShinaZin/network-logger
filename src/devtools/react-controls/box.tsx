@@ -2,8 +2,11 @@ import * as React from 'react';
 import * as bc from 'devtools/styles/base';
 import styled from 'styled-components';
 
-interface StyledProps extends Omit<Props, 'spacing'> {
+type Margin = true | `${number}px`;
+
+interface StyledProps extends Omit<Props, 'spacing' | 'overflow'> {
   spacingM?: Props['spacing'];
+  overflowM?: Props['overflow'];
 }
 
 const StyledDiv = styled.div<StyledProps>`
@@ -18,6 +21,14 @@ const StyledDiv = styled.div<StyledProps>`
   padding-right: ${p => (p.padding == 'h' || p.padding === true) && bc.spacing};
   padding-top: ${p => (p.padding == 'v' || p.padding === true) && bc.spacing};
   padding-bottom: ${p => (p.padding == 'v' || p.padding === true) && bc.spacing};
+  justify-content: ${p => getJustifyContentValue(p)};
+  margin-left: ${p => p.marginLeft === true ? 'auto' : p.marginLeft};
+  margin-right: ${p => p.marginRight === true ? 'auto' : p.marginRight};
+  margin-top: ${p => p.marginTop === true ? 'auto' : p.marginTop};
+  margin-bottom: ${p => p.marginBottom === true ? 'auto' : p.marginBottom};
+  overflow: ${p => p.overflowM === true ? 'auto' : undefined};
+  overflow-x: ${p => p.overflowM === 'x' ? 'auto' : undefined};
+  overflow-y: ${p => p.overflowM === 'y' ? 'auto' : undefined};
 `;
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
@@ -27,16 +38,30 @@ interface Props extends React.HTMLAttributes<HTMLDivElement> {
   spacing?: boolean;
   spacingSm?: boolean;
   padding?: 'v' | 'h' | true;
+  marginLeft?: Margin;
+  marginRight?: Margin;
+  marginTop?: Margin;
+  marginBottom?: Margin;
+  justifyContent?: 'start' | 'center' | 'end';
+  overflow?: 'x' | 'y' | true;
 }
 
 export const Box: React.FC<Props> = props => {
-  const { spacing, ...rest } = props;
+  const { spacing, overflow, ...rest } = props;
   return (
-    <StyledDiv spacingM={spacing} {...rest}>
+    <StyledDiv spacingM={spacing} overflowM={overflow} {...rest}>
       {props.children}
     </StyledDiv>
   );
 };
+
+function getJustifyContentValue(p: Props) {
+  return p.justifyContent == 'start'
+    ? 'flex-start'
+    : p.justifyContent == 'end'
+      ? 'flex-end'
+      : undefined;
+}
 
 function getMarginValue(props: StyledProps) {
   return (props.spacingM && bc.spacing) || (props.spacingSm && bc.spacingSm);
