@@ -5,7 +5,7 @@ import { Rules } from './rules-list/rules';
 import { Container } from './styles';
 
 export const App: React.FC = () => (
-  <Container>
+  <Container col>
     <Header />
     <RulesContextProvider>
       <Rules />
