@@ -27,7 +27,7 @@ interface State {
 export { Consumer as RulesContextConsumer };
 
 export class RulesContextProvider extends React.Component<unknown, State> {
-  state = { rules: ConfigStorage.getRules() };
+  state = { rules: [] as Rule[] };
 
   private insertRule = (index: number) => {
     const rule = makeRule();
@@ -59,6 +59,11 @@ export class RulesContextProvider extends React.Component<unknown, State> {
     this.setState({ rules });
     ConfigStorage.setRules(rules);
   };
+
+  async componentDidMount() {
+    const rules = await ConfigStorage.getRules();
+    this.setState({ rules });
+  }
 
   render() {
     const value = {

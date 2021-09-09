@@ -25,13 +25,13 @@
     "scripts": [
       "background/index.js"
     ],
-    "persistent": false
+    "persistent": true
   },
   "devtools_page": "devtools/index.html",
   "web_accessible_resources": [
     "assets/icons/*.png"
   ],
   "permissions": [
-    "*://*/*"
+    "storage"
   ]
 }
