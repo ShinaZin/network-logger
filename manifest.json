@@ -32,6 +32,9 @@
     "assets/icons/*.png"
   ],
   "permissions": [
-    "storage"
+    "tabs",
+    "activeTab",
+    "storage",
+    "webRequest"
   ]
 }
