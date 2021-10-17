@@ -2,17 +2,18 @@ import { getJsonValue, isValidJson } from 'core/helpers';
 import { Request, Response } from 'core/types';
 import { Rule } from 'devtools/app/rules-list/types';
 
+type LogData = Record<string, unknown>;
+
 export function logRequestData(request: Request, rule: Rule) {
-  console.log('%c[netlogger request]:', 'color: #0372AA');
   const { postData, query: queryString } = request;
   const { path } = rule;
   if (path === '*') {
-    console.log({ postData, queryString });
+    logWithRequestHeader({ postData, queryString });
   } else if (path === '?') {
-    console.log({ queryString });
-  } else {
+    logWithRequestHeader({ queryString });
+  } else if (path) {
     const value = postData && getJsonValue(path, postData);
-    value && console.log({ path, value });
+    logWithRequestHeader({ path, value });
   }
 }
 
@@ -20,12 +21,21 @@ export function logResponseData(response: Response, rule: Rule) {
   if (isValidJson(response.data)) {
     const parsed = JSON.parse(response.data);
     const { path } = rule;
-    console.log('%c[netlogger response]:', 'color: #F7A454');
     if (path === '*') {
-      console.log(parsed);
-    } else {
+      logWithResponseHeader(parsed);
+    } else if (path) {
       const value = getJsonValue(path, parsed);
-      value && console.table({ path, value });
+      logWithResponseHeader({ path, value });
     }
   }
+}
+
+function logWithRequestHeader(data: LogData) {
+  console.log('%c[netlogger request]:', 'color: #0372AA');
+  console.log(data);
+}
+
+function logWithResponseHeader(data: LogData) {
+  console.log('%c[netlogger response]:', 'color: #F7A454');
+  console.log(data);
 }
