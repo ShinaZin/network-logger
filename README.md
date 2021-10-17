@@ -1,3 +1,5 @@
+
+# <img src='https://raw.githubusercontent.com/ShinaZin/network-logger/master/assets/icons/icon128.png' height='128' alt='Netlogger Logo' aria-label='Network logger'/> 
 # Network logger
 
 Browser Extension to log specific network traffic
