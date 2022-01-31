@@ -4,8 +4,12 @@
   "description": "Browser Extension to log specific network traffic",
   "main": "index.js",
   "scripts": {
+    "// public //": "public scripts:",
+    "dist": "npm run clean && npm run build && npm run copy",
     "watch": "onchange src/** -- npm run build",
-    "watch:devtools": "onchange src/devtools/** -- npm run build:devtools:all",
+    "lint": "eslint --ext .ts,.tsx ./src",
+    "test": "jest -c ./config/jest.config.js",
+    "// private //": "private scripts:",
     "build:bg": "esbuild --bundle src/background/index.ts --outfile=dist/background/index.js",
     "build:content": "esbuild --bundle src/content/index.ts --outfile=dist/content/index.js",
     "build:devtools:all": "npm run build:devtools && npm run build:devtools:app",
@@ -15,9 +19,7 @@
     "clean": "rimraf dist",
     "copy:devtools": "copyfiles -u 1 src/devtools/**/*.html dist/",
     "copy:static": "copyfiles manifest.json assets/**/* dist",
-    "dist": "npm run clean && npm run build && npm run copy:static && npm run copy:devtools",
-    "lint": "eslint --ext .ts,.tsx ./src",
-    "test": "jest -c ./config/jest.config.js"
+    "copy": "npm run copy:devtools && npm run copy:static"
   },
   "author": "ShinaZin aka Sol0Zon3",
   "license": "MIT",
