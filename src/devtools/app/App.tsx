@@ -8,7 +8,7 @@ import { Container } from './styles';
 chrome.devtools.network.onRequestFinished.addListener(request => {
   const { postData, url, queryString } = request.request;
   sendRequestData({
-    postData: postData ? JSON.parse(postData?.text) : undefined,
+    postData: postData ? JSON.parse(postData?.text || '') : undefined,
     query: queryString,
     url
   });
