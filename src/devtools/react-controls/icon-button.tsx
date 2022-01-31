@@ -1,6 +1,6 @@
-import { Color } from 'devtools/styles/status-colors';
 import * as React from 'react';
 import styled from 'styled-components';
+import { Color } from 'devtools/styles/status-colors';
 
 const StyledButton = styled.button<Props>`
   background-color: transparent;
