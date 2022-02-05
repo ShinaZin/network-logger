@@ -213,8 +213,6 @@
     "switch-colon-spacing": "error",
     "template-tag-spacing": "error",
     "jsx-quotes":  ["error", "prefer-single"],
-    "react/react-in-jsx-scope": "off",
-    "react/jsx-uses-react": "off",
     "react/jsx-child-element-spacing": "error",
     "react/jsx-closing-bracket-location": [
       "error",
