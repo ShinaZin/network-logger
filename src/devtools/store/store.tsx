@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { uuid } from 'common/uuid';
 import { ConfigStorage } from 'core/config-storage';
-import { Rule } from 'devtools/app/rules-list/types';
+import { Rule, RuleType } from 'devtools/app/rules-list/types';
 
 export interface RulesContext {
   rules: Rule[];
@@ -83,6 +83,7 @@ export class RulesContextProvider extends React.Component<unknown, State> {
 function makeRule(): Rule {
   return {
     id: uuid(),
+    type: RuleType.Response,
     url: '',
     path: '',
   };
