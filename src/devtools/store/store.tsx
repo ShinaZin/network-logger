@@ -7,6 +7,7 @@ export interface RulesContext {
   rules: Rule[];
   insertRule: (index: number) => void;
   removeRule: (index: number) => void;
+  setRuleType: (index: number, type: RuleType) => void;
   setRuleUrl: (index: number, url: Rule['url']) => void;
   setRulePath: (index: number, path: Rule['path']) => void;
 }
@@ -15,6 +16,7 @@ const { Provider, Consumer } = React.createContext<RulesContext>({
   rules: [],
   insertRule: () => {},
   removeRule: () => {},
+  setRuleType: () => {},
   setRuleUrl: () => {},
   setRulePath: () => {},
 });
@@ -38,6 +40,13 @@ export class RulesContextProvider extends React.Component<unknown, State> {
 
   private removeRule = (index: number) => {
     const rules = [...this.state.rules.slice(0, index), ...this.state.rules.slice(index + 1)];
+    this.setRules(rules);
+  };
+
+  private setRuleType = (index: number, type: RuleType) => {
+    const rules = [...this.state.rules];
+    const rule = rules[index];
+    rules[index] = { ...rule, type: type };
     this.setRules(rules);
   };
 
@@ -70,6 +79,7 @@ export class RulesContextProvider extends React.Component<unknown, State> {
       rules: this.state.rules,
       insertRule: this.insertRule,
       removeRule: this.removeRule,
+      setRuleType: this.setRuleType,
       setRuleUrl: this.setRuleUrl,
       setRulePath: this.setRulePath,
     };

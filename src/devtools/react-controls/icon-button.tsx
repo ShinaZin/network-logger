@@ -12,18 +12,18 @@ const StyledButton = styled.button<Props>`
   vertical-align: middle;
   display: inline-block;
   cursor: pointer;
-  filter: ${p => getIconColorFilters(p, 50)};
+  filter: ${p => getIconColorFilters(p, 80)};
 
   :hover {
-    filter: ${p => getIconColorFilters(p, 85)}
+    filter: ${p => getIconColorFilters(p, 150)}
   }
 
   :active {
-    filter: ${p => getIconColorFilters(p, 50)}
+    filter: ${p => getIconColorFilters(p, 80)}
   }
 
   :disabled {
-    filter: ${p => getIconColorFilters(p, 30)}
+    filter: ${p => getIconColorFilters(p, 50)}
   }
 `;
 
@@ -42,7 +42,7 @@ export const IconButton: React.FC<Props> = props => {
 };
 
 function getIconColorFilters(p: { status?: Color }, brightness: number) {
-  const bright = `brightness(${brightness}%)`;
+  const bright = `invert(50%) brightness(${brightness}%)`;
   if (!p.status) {
     return bright;
   }
@@ -50,5 +50,5 @@ function getIconColorFilters(p: { status?: Color }, brightness: number) {
   const hue = (value: number) => `hue-rotate(${value}deg)`;
   const colored = p.status == Color.error ? hue(-50) : '';
 
-  return `${bright} sepia(100%) ${colored} saturate(150%)`;
+  return `invert(50%) ${bright} sepia(100%) ${colored} saturate(200%)`;
 }
