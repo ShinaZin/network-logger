@@ -1,16 +1,15 @@
-import { findMatchingRule } from 'core/helpers';
+import { findMatchingRules } from 'core/helpers';
 import { Message } from 'core/types';
+import { RuleType } from 'devtools/app/rules-list/types';
 import { logRequestData, logResponseData } from './logger';
 
 chrome.runtime.onMessage.addListener(async (message: Message) => {
-  const rule = await findMatchingRule(message.url);
-  if (!rule) {
-    return;
-  }
+  const rules = await findMatchingRules(message.url, message.type);
 
-  switch (message.type) {
-    case 'request': logRequestData(message, rule); break;
-    case 'response': logResponseData(message, rule); break;
+  for (const rule of rules) {
+    switch (message.type) {
+      case RuleType.Request: logRequestData(message, rule); break;
+      case RuleType.Response: logResponseData(message, rule); break;
+    }
   }
 });
-

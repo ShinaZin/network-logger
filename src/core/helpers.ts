@@ -1,12 +1,13 @@
+import { RuleType } from 'devtools/app/rules-list/types';
 import { ConfigStorage } from './config-storage';
 import { Message, Request, Response } from './types';
 
 export function sendResponseData(data: Omit<Response, 'type'>) {
-  sendToActiveTab({ type: 'response', ...data });
+  sendToActiveTab({ type: RuleType.Response, ...data });
 }
 
 export function sendRequestData(data: Omit<Request, 'type'>) {
-  sendToActiveTab({ type: 'request', ...data });
+  sendToActiveTab({ type: RuleType.Request, ...data });
 }
 
 function sendToActiveTab(data: Message) {
@@ -32,9 +33,7 @@ export function isValidJson(data: string) {
   return false;
 }
 
-export async function findMatchingRule(url: string) {
+export async function findMatchingRules(url: string, type: RuleType) {
   const rules = await ConfigStorage.getRules();
-  return rules.find(rule => {
-    return url.includes(rule.url);
-  });
+  return rules.filter(rule => rule.type === type && url.includes(rule.url));
 }

@@ -1,15 +1,17 @@
+import { RuleType } from 'devtools/app/rules-list/types';
+
 type BrowserRequest = chrome.devtools.network.Request['request'];
 type PostData = Record<string, any>;
 type Query = BrowserRequest['queryString'];
 
 export interface Response {
-  type: 'response';
+  type: RuleType.Response;
   data: string;
   url: string;
 }
 
 export interface Request {
-  type: 'request';
+  type: RuleType.Request;
   postData?: PostData;
   query: Query;
   url: string;
