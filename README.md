@@ -3,25 +3,21 @@
 # Network logger
 
 Browser Extension to log specific network traffic
+- Network logger is the better alternative to `console.log()` for debugging applications.
+- Watching network data similar to variable watchers
 
-## Following parts
+Example for repeating requests:
 
-* Background script (vanilla TS)
-* Content script (vanilla TS)
-* DevTools panel page (React.js, Styled Components)
+![Netlogger](https://user-images.githubusercontent.com/18055854/158056378-8250d7a2-4397-468e-8ea8-895e52547063.gif)
 
-## Environment
-
-* Node.js >=12.0.0
-* NPM >= 6.0.0
-
-
-## Testing
-
-`Jest` is included and ready for the vanilla TS parts. Testing for React/Vue is not included in order to keep the Jest config clean.
+## Help
+- First input: partial URL of request
+- Second input: 
+  - `path to JSON field`, _or_
+  - `?` - log only query string, _or_
+  - `*` - log full JSON, _or_
+  - empty - log nothing
 
 ## Scripts
 
 * `npm run dist` - build the extension into `./dist` folder
-* `npm run lint` - ESLint for `.ts` and `.tsx` files
-* `npm run test` - Jest unit tests
