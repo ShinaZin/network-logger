@@ -1,6 +1,10 @@
 
 # <img src='https://raw.githubusercontent.com/ShinaZin/network-logger/master/assets/icons/icon128.png' height='128' alt='Netlogger Logo' aria-label='Network logger'/> 
 # Network logger
+![GitHub](https://img.shields.io/github/license/ShinaZin/network-logger)
+![GitHub](https://img.shields.io/github/last-commit/ShinaZin/network-logger) 
+![GitHub Release Date](https://img.shields.io/github/release-date/ShinaZin/network-logger)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/ShinaZin/network-logger)
 
 Browser Extension to log specific network traffic
 - Network logger is the better alternative to `console.log()` for debugging applications.
